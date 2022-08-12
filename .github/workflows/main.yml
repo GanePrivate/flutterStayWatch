@@ -35,7 +35,7 @@ jobs:
 
       - name: flutter dependencies install
         #ライブラリーの導入
-        run: flutter pub add http
+        run: flutter pub get
 
       - name: build apk
         run: |
