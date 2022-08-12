@@ -7,4 +7,6 @@ https://stay-watch-go.kajilab.tk/
 https://github.com/GanePrivate/flutterStayWatch/releases
 
 ## デモ
+<div style="text-align: center">
 <img src="demo.gif" alt="demo" width="auto" height="480px">
+</div>
