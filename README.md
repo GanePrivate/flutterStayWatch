@@ -8,5 +8,5 @@ https://github.com/GanePrivate/flutterStayWatch/releases
 
 ## デモ
 <div align="center">
-<img src="demo.gif" alt="demo" width="auto" height="480px">
+<img src="demo.gif" alt="demo" width="auto" height="430px">
 </div>
