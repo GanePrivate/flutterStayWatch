@@ -10,3 +10,7 @@ https://github.com/GanePrivate/flutterStayWatch/releases
 <div align="center">
 <img src="demo.gif" alt="demo" width="auto" height="430px">
 </div>
+
+## 更新点
+[Ver.1.1.0]  
+滞在状況やログが更新されたら画面に自動で反映する機能を追加した．
