@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -10,37 +11,43 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'New! 滞在ウォッチ',
-      home: StayLog(title: '在室者一覧'),
+      home: CurrentStay(title: '在室者一覧'),
     );
   }
 }
 
-class StayLog extends StatefulWidget {
-  const StayLog({Key? key, required this.title}) : super(key: key);
+class CurrentStay extends StatefulWidget {
+  const CurrentStay({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  State<StayLog> createState() => _StayLogState();
+  State<CurrentStay> createState() => _StayLogState();
 }
 
-class _StayLogState extends State<StayLog> {
+class _StayLogState extends State<CurrentStay> {
   List items = [];
 
   // Futureで非同期処理
   Future<void> getData() async {
 
-    // Getクエリの発行と実行
-    var response = await http.get(Uri.https(
-        'go-staywatch.kajilab.tk',
-        '/room/v1/stayer'));
+    while(true) {
+      // Getクエリの発行と実行
+      var response = await http.get(Uri.https(
+          'go-staywatch.kajilab.tk',
+          '/room/v1/stayer'));
 
-    // レスポンスをjson形式にデコードして取得
-    var jsonResponse = jsonDecode(response.body);
+      // レスポンスをjson形式にデコードして取得
+      var jsonResponse = jsonDecode(response.body);
 
-    // ステートに登録(画面に反映させる)
-    setState(() {
-      items = jsonResponse;
-    });
+      // ステートに登録(画面に反映させる)
+      setState(() {
+        items = jsonResponse;
+      });
+
+      // 5秒スリープ
+      await Future.delayed(const Duration(seconds: 2));
+    }
+
   }
 
   @override

@@ -30,19 +30,25 @@ class _StayLogState extends State<StayLog> {
   // Futureで非同期処理
   Future<void> getData() async {
 
-    // Getクエリの発行と実行
-    var response = await http.get(Uri.https(
-        'go-staywatch.kajilab.tk',
-        '/room/v1/log',
-        {'page': '1'}));
+    while(true) {
+      // Getクエリの発行と実行
+      var response = await http.get(Uri.https(
+          'go-staywatch.kajilab.tk',
+          '/room/v1/log',
+          {'page': '1'}));
 
-    // レスポンスをjson形式にデコードして取得
-    var jsonResponse = jsonDecode(response.body);
+      // レスポンスをjson形式にデコードして取得
+      var jsonResponse = jsonDecode(response.body);
 
-    // ステートに登録(画面に反映させる)
-    setState(() {
-      items = jsonResponse;
-    });
+      // ステートに登録(画面に反映させる)
+      setState(() {
+        items = jsonResponse;
+      });
+
+      // 5秒スリープ
+      await Future.delayed(const Duration(seconds: 5));
+    }
+
   }
 
   @override
