@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../util/formatText.dart';
+import '../screens/loadAnimation.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,15 +28,14 @@ class CurrentStay extends StatefulWidget {
 
 class _StayLogState extends State<CurrentStay> {
   List items = [];
+  bool isLoading = false;
 
   // Futureで非同期処理
   Future<void> getData() async {
-
-    while(true) {
+    while (true) {
       // Getクエリの発行と実行
-      var response = await http.get(Uri.https(
-          'go-staywatch.kajilab.tk',
-          '/room/v1/stayer'));
+      var response = await http
+          .get(Uri.https('go-staywatch.kajilab.tk', '/api/v1/stayers'));
 
       // レスポンスをjson形式にデコードして取得
       var jsonResponse = jsonDecode(response.body);
@@ -42,12 +43,12 @@ class _StayLogState extends State<CurrentStay> {
       // ステートに登録(画面に反映させる)
       setState(() {
         items = jsonResponse;
+        isLoading = true;
       });
 
       // 5秒スリープ
       await Future.delayed(const Duration(seconds: 2));
     }
-
   }
 
   @override
@@ -58,12 +59,16 @@ class _StayLogState extends State<CurrentStay> {
 
   @override
   Widget build(BuildContext context) {
-    if (items.isEmpty){
+    if (!isLoading) {
+      // データのロード中はローディングアニメーションを表示
+      return createProgressIndicator();
+    } else if (items.isEmpty) {
       // 滞在者がいない場合
       return Scaffold(
         appBar: AppBar(title: const Text('滞在者一覧')),
         body: const Scaffold(
-          body: Center(child: Text('誰もいないみたい', style: TextStyle(fontSize: 32.0))),
+          body:
+              Center(child: Text('誰もいないみたい', style: TextStyle(fontSize: 32.0))),
         ),
       );
     } else {
@@ -82,15 +87,15 @@ class _StayLogState extends State<CurrentStay> {
                       color: Colors.indigoAccent,
                       size: 50,
                     ),
-                    title: Text(items[index]['name'],
+                    title: Text(
+                      items[index]['name'],
                       style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     subtitle: Text(formatStayUserText(items[index]),
-                        style: const TextStyle(fontSize: 20)
-                    ),
+                        style: const TextStyle(fontSize: 20)),
                   ),
                 ],
               ),
