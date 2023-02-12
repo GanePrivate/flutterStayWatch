@@ -34,7 +34,7 @@ class _UsersState extends State<Users> {
     // Getクエリの発行と実行
     var response = await http.get(Uri.https(
         'go-staywatch.kajilab.tk',
-        '/user/v1/list'));
+        '/api/v1/users'));
 
     // レスポンスをjson形式にデコードして取得
     var jsonResponse = jsonDecode(response.body);

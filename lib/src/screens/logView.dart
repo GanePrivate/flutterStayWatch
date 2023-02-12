@@ -34,7 +34,7 @@ class _StayLogState extends State<StayLog> {
       // Getクエリの発行と実行
       var response = await http.get(Uri.https(
           'go-staywatch.kajilab.tk',
-          '/room/v1/log',
+          '/api/v1/logs',
           {'page': '1'}));
 
       // レスポンスをjson形式にデコードして取得
