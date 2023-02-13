@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import '../util/formatText.dart';
 import '../screens/loadAnimation.dart';
 
+// 下のメニューバーに関するクラス
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -18,6 +19,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+// ステートフルウィジェットの為の前処理？
 class CurrentStay extends StatefulWidget {
   const CurrentStay({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -26,6 +28,7 @@ class CurrentStay extends StatefulWidget {
   State<CurrentStay> createState() => _StayLogState();
 }
 
+// ↑のやつを継承して実際の処理の中身が書かれたクラス
 class _StayLogState extends State<CurrentStay> {
   List items = [];
   bool isLoading = false;
@@ -51,6 +54,7 @@ class _StayLogState extends State<CurrentStay> {
     }
   }
 
+  // ステートの初期化
   @override
   void initState() {
     super.initState();
