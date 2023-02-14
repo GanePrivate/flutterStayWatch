@@ -3,7 +3,7 @@
 https://stay-watch-go.kajilab.tk/
 
 ## アプリのインストール方法
-以下のURLから FileUploadSample.apk をダウンロードしてください．  
+以下のURLから StayWatchApp.apk をダウンロードしてください．  
 https://github.com/GanePrivate/flutterStayWatch/releases
 
 ## デモ
