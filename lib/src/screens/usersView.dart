@@ -32,7 +32,7 @@ class _UsersState extends State<Users> {
   Future<void> getData() async {
     // Getクエリの発行と実行
     var response =
-        await http.get(Uri.https('go-staywatch.kajilab.tk', '/api/v1/users'));
+        await http.get(Uri.https('go-staywatch.kajilab.tk', '/api/v1/users/2'));
 
     // レスポンスをjson形式にデコードして取得
     var jsonResponse = jsonDecode(response.body);
