@@ -13,6 +13,9 @@ https://github.com/GanePrivate/flutterStayWatch/releases
 
 ## 更新点
 #### Ver.1.1.4
+- APIのレスポンス形式の変更に対処した 
+
+#### Ver.1.1.4
 - 滞在ウォッチのAPIのパスが変更されたのに対応した
 - データのロード中にアニメーションが出るようにした
 
